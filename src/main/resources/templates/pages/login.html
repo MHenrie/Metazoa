@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matazoa | Login</title>
+    <link rel="stylesheet" href="styles/formularios.css">
+</head>
+
+<body>
+    <div id="corpo-login">
+        <div class="container login">
+            <div id="logo-login">
+                <a href="/">
+                    <img src="../imagens/logo.png">
+                </a>
+            </div>
+            <div class="row">
+                <h4>Login</h4>
+            </div>
+            <form for="login" method="POST" action="../Backend/login.php" autocomplete="off">
+                <div class="row row-end row-top">
+                    <input type="email" placeholder="Email" id="emailInput" name="emailInput" required>
+                </div>
+                <div class="row row-end row-top">
+                    <input type="password" placeholder="Senha" id="senhaInput" name="senhaInput" required>
+                </div>
+
+                <div class="row-opt block-opt">
+                    <div>
+                        <label for="opcao">Acessar como:</label>
+                    </div>
+                    <div class="item-opt">
+                        <input type="radio" name="opcaoLogin" value="pessoa">
+                        <label for="pessoa">Pessoa</label>
+                    </div>
+                    <div class="item-opt">
+                        <input type="radio" name="opcaoLogin" value="Instituicao">
+                        <label for="canil">Instituição</label>
+                    </div>
+                </div>
+                <div id="submit">
+                    <input id="enviar" type="submit" value="Entrar">
+                </div>
+            </form>
+            <br />
+            <div class="row">
+                <label>Não tem um perfil ainda?</label>
+            </div>
+            <div class="row-opt">
+                <div class="item-opt space-top">
+                    <a href="cadastro-instituicao">Cadastre sua Instituição</a> <br />
+                </div>
+                <div class="item-opt space-top">
+                    <a href="cadastro-pessoa">Cadastre seu perfil pessoal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
