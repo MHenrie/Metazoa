@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -33,13 +33,20 @@
     <div id="corpo">
         <div class="container">
             <h2>Cadastro de Pessoa</h2>
-            <form id="dadosCanil" method="POST" autocomplete="off">
+            <form method="POST" autocomplete="off">
                 <div class="row row-end row-top">
-                    <input placeholder="Nome Completo" type="text" name="nome" required>
+                    <input placeholder="Nome Completo" type="text" value="" name="nome" required>
                 </div>
                 <div class="grid">
                     <div class="row">
-                        <select name="estado" placeholder="Estado" id="inputEstado" required>
+                        <input type="email" placeholder="Email" value="" name="email" required>
+                    </div>
+                    <div class="row">
+                        <input type="number" placeholder="Telefone" value="" name="telefone" minlength="10"
+                            maxlength="11" required>
+                    </div>
+                    <div class="row">
+                        <select name="estado" placeholder="Estado" value="" id="inputEstado" required>
                             <option value="" disabled selected hidden>Estado</option>
                             <option value="AC">Acre</option>
                             <option value="AL">Alagoas</option>
@@ -71,35 +78,28 @@
                         </select>
                     </div>
                     <div class="row">
-                        <input type="text" placeholder="Cidade" name="cidade" required>
+                        <input type="text" placeholder="Cidade" value="" name="cidade" required>
                     </div>
                     <div class="row">
-                        <input type="text" placeholder="Rua" name="rua" required>
+                        <input type="text" placeholder="Bairro (opcional)" value="" name="bairro">
                     </div>
                     <div class="row">
-                        <input type="number" placeholder="Número" name="numero_residencia" required>
-                    </div>
-                    <!-- <div class="row">
-                        <input type="number" placeholder="Complemento" name="complemento">
-                    </div> -->
-                    <div class="row">
-                        <input type="text" placeholder="Bairro" name="bairro" required>
+                        <input type="text" placeholder="Rua (opcional)" value="" name="rua">
                     </div>
                     <div class="row">
-                        <input type="number" placeholder="Telefone para Contato" name="telefone" minlength="10"
-                            maxlength="11" required>
+                        <input type="number" placeholder="Número (opcional)" value="" name="numeroEndereco">
                     </div>
                     <div class="row">
-                        <input type="email" placeholder="Email" name="email" required>
+                        <input type="number" placeholder="Complemento (opcional)" name="complemento">
                     </div>
                     <div class="row">
-                        <input type="password" placeholder="Senha" name="senha" id="senha" minlength="6"
+                        <input type="password" placeholder="Senha" value="" name="senha" id="senha" minlength="6"
                             maxlength="12" required>
                     </div>
-                    <!-- <div class="row">
+                    <div class="row">
                         <input type="password" placeholder="Confirmar Senha" name="confirmaSenha" id="confirmaSenha"
                             required onkeyup="VerificaSenha()">
-                    </div> -->
+                    </div>
                 </div>
                 <div class="row">
                     <p id="comparaSenhas"></p>
@@ -110,6 +110,8 @@
             </form>
         </div>
     </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script type="text/javascript">
 
@@ -123,6 +125,33 @@
                 document.getElementById("comparaSenhas").innerText = "As senhas não coincidem."
             }
         }
+
+        function serialize(form) {
+            var json = {};
+            var data = new FormData(form);
+            var keys = data.keys();
+            for (var key = keys.next(); !key.done; key = keys.next()) {
+                var values = data.getAll(key.value);
+                json[key.value] = values.length == 1 ? values[0] : values;
+            }
+            return json;
+        }
+
+        var form = document.querySelector("form");
+        var enviar = document.getElementById("enviar");
+
+        enviar.addEventListener("click", () => {
+            var json = serialize(form);
+            axios.post('/api/pessoa', json)
+                .then(function (response) {
+                    console.log(response);
+                    window.location.href = "http://localhost:8080/login";
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
     </script>
 </body>
 

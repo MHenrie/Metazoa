@@ -4,25 +4,27 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-public class PessoaJuridica extends Pessoa {
+public class Instituicao extends Pessoa {
 
     private static final long serialVersionUID = 1L;
 
     @NotBlank
     @Column(unique = true)
     private String cnpj;
-    @NotBlank
     private String contaBancaria;
 
-    public PessoaJuridica() {
+    public Instituicao() {
 
     }
 
-    public PessoaJuridica(String nome, String telefone, String email, String senha, String estado, String cidade,
-            String bairro, String rua, int numeroResidencia, String cnpj, String contaBancaria) {
+    public Instituicao(String nome, String telefone, String email, String senha, String estado, String cidade,
+            String bairro, String rua, int numeroEndereco, String complemento, String cnpj, String contaBancaria) {
 
-        super(nome, telefone, email, senha, estado, cidade, bairro, rua, numeroResidencia);
+        super(nome, telefone, email, senha, estado, cidade, bairro, rua, numeroEndereco, complemento);
         this.cnpj = cnpj;
         this.contaBancaria = contaBancaria;
     }
